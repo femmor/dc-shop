@@ -1,9 +1,19 @@
 import React from "react";
+import {
+  Navbar,
+  HeroBanner,
+  Layout,
+  Product,
+  Cart,
+  Footer,
+  FooterBanner,
+} from "../components";
 
 const Home = () => {
   return (
     <>
-      HeroBanner
+      <Navbar />
+      <HeroBanner />
       <div className="products-heading">
         <h2>Best Selling Products</h2>
         <p>Speakers of many variations</p>
@@ -13,7 +23,8 @@ const Home = () => {
           <div key={i}>{product}</div>
         ))}
       </div>
-      Footer
+      <FooterBanner />
+      <Footer />
     </>
   );
 };

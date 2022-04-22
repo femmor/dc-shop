@@ -8,8 +8,9 @@ import {
   Footer,
   FooterBanner,
 } from "../components";
+import { client } from "../lib/client";
 
-const Home = () => {
+const Home = ({ products, bannerData }) => {
   return (
     <>
       <Navbar />
@@ -19,14 +20,26 @@ const Home = () => {
         <p>Speakers of many variations</p>
       </div>
       <div className="products-container">
-        {["Product 1", "Product 2", "Product 3"].map((product, i) => (
-          <div key={i}>{product}</div>
+        {products?.map((product, i) => (
+          <div key={i}>{product.name}</div>
         ))}
       </div>
       <FooterBanner />
       <Footer />
     </>
   );
+};
+
+export const getServerSideProps = async () => {
+  const query = '*[_type == "product"]';
+  const products = await client.fetch(query);
+
+  const bannerQuery = '*[_type == "banner"]';
+  const bannerData = await client.fetch(bannerQuery);
+
+  return {
+    props: { products, bannerData },
+  };
 };
 
 export default Home;
